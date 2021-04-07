@@ -60,8 +60,12 @@ const Editor = ({
       dispatch(() => addAlert('ErrorNoDatabaseConnected'));
       dispatch(() => addFrame(command, 'ServerDisconnect', refKey));
     } else if (database.status === 'disconnected' && command.toUpperCase() === ':SERVER CONNECT') {
-      dispatch(() => trimFrame('ServerConnect'));
-      dispatch(() => addFrame(':server connect', 'ServerConnect'));
+      /*
+        at AG Cloud version this feature not service
+        If you want to re-enable this feature, please uncomment the code below
+      -----------code----------*/
+      // dispatch(() => trimFrame('ServerConnect'));
+      // dispatch(() => addFrame(':server connect', 'ServerConnect'));
     } else if (database.status === 'disconnected' && command.toUpperCase().match('(MATCH|CREATE).*')) {
       dispatch(() => trimFrame('ServerConnect'));
       dispatch(() => addAlert('ErrorNoDatabaseConnected'));
@@ -71,9 +75,13 @@ const Editor = ({
       dispatch(() => addAlert('NoticeServerDisconnected'));
       dispatch(() => addFrame(command, 'ServerDisconnect', refKey));
     } else if (database.status === 'connected' && command.toUpperCase() === ':SERVER CONNECT') {
-      dispatch(() => trimFrame('ServerStatus'));
-      dispatch(() => addAlert('NoticeAlreadyConnected'));
-      dispatch(() => addFrame(command, 'ServerStatus', refKey));
+      /*
+        at AG Cloud version this feature not service
+        If you want to re-enable this feature, please uncomment the code below
+      -----------code----------*/
+      // dispatch(() => trimFrame('ServerStatus'));
+      // dispatch(() => addAlert('NoticeAlreadyConnected'));
+      // dispatch(() => addFrame(command, 'ServerStatus', refKey));
     } else if (database.status === 'connected') {
       const reqStringValue = command;
       dispatch(() => executeCypherQuery([refKey, reqStringValue]).then((response) => {

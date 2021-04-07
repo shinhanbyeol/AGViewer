@@ -15,7 +15,6 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Contents from '../../frame/containers/ContentsFrameContainer';
 import ServerStatus from '../../frame/containers/ServerStatusContainer';
@@ -27,22 +26,29 @@ import CypherResult from '../../frame/containers/CypherResultContainers';
 const Frames = ({
   database,
   frameList,
-  addFrame,
   queryResult,
   maxNumOfFrames,
 }) => {
-  const dispatch = useDispatch();
   const [frames, setFrames] = useState(null);
 
   useEffect(() => {
     if (database.status === 'connected' && frameList.length === 0) {
-      dispatch(() => addFrame(':server status', 'ServerStatus'));
+      /*
+        at AG Cloud version this feature not service
+        If you want to re-enable this feature, please uncomment the code below
+      -----------code----------*/
+      // dispatch(() => addFrame(':server status', 'ServerStatus'));
     }
 
     if (database.status === 'disconnected') {
       const serverConnectFrames = frameList.filter((frame) => (frame.frameName.toUpperCase() === 'SERVERCONNECT'));
       if (serverConnectFrames.length === 0) {
-        dispatch(() => addFrame(':server connect', 'ServerConnect'));
+        window.close();
+        /*
+        at AG Cloud version this feature not service
+        If you want to re-enable this feature, please uncomment the code below
+        -----------code----------*/
+        // dispatch(() => addFrame(':server connect', 'ServerConnect'));
       }
     }
   }, [database.status]);
@@ -146,7 +152,6 @@ Frames.propTypes = {
       isPinned: PropTypes.bool.isRequired,
     }),
   ).isRequired,
-  addFrame: PropTypes.func.isRequired,
   // todo: need to refactoring on management Cypher Results
   // eslint-disable-next-line react/forbid-prop-types
   queryResult: PropTypes.any,

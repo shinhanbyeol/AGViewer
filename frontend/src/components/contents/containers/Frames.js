@@ -16,7 +16,6 @@
 
 import { connect } from 'react-redux';
 import Frames from '../presentations/Frames';
-import { addFrame } from '../../../features/frame/FrameSlice';
 
 const mapStateToProps = (state) => ({
   frameList: state.frames,
@@ -25,6 +24,6 @@ const mapStateToProps = (state) => ({
   maxNumOfFrames: state.setting.maxNumOfFrames,
 });
 
-const mapDispatchToProps = { addFrame };
+const mapDispatchToProps = { };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Frames);
